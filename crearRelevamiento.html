@@ -1,8 +1,4 @@
-<?php
-session_start();
- if(isset($_SESSION['usuario'])){
-    
-  ?>
+
 <!doctype html>
 <html lang="es">
   <head>
@@ -28,7 +24,7 @@ session_start();
             <div class="d-flex justify-content-start">
                 <a class="navbar-brand">
                     <img  class="profile-img-card" src="images/cuenta.png" width="30" height="30" />
-                    <?php echo "<small style='color: #ffffff;'>".$_SESSION['Nombres']."</small>" ;?>
+                    
                 </a>
             </div>
            <span class="navbar-brand">Crear relevamiento</span>
@@ -187,13 +183,5 @@ session_start();
 
     </script>
 </html>
-<?php
-}
-else{
 
- header("Location: ./index.html"); 
-}
-
-
-?>
 
