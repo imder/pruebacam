@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/mis_estilos.css">
+    <!-- Bootstrap JS -->
+    <script src="js/registrarUsuario.js"></script>
+   
+    
+    <title>Registro de usuarios</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    
+  </head>
+  <body>
+      <nav class="">
+              <span class="navbar-brand">Registro de Usuarios</span>
+      </nav>
+
+  <div class="container">
+
+
+    <form class="formulario" id="form" action="php/regUsuario.php" method="POST" >
+        
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Nombres</div>
+          </div>
+          <input type="text" class="form-control" name="nombres" placeholder="Nombres">
+        </div>
+
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">A. Paterno</div>
+            </div>
+            <input type="text" class="form-control" name="appaterno" placeholder="Apellido Paterno">
+          </div>
+        
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">A. Materno</div>
+            </div>
+            <input type="text" class="form-control" name="apmaterno" placeholder="Apellido Materno">
+         </div>
+
+         <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">No de carnet</div>
+            </div>
+            <input type="text" class="form-control" name="carnet" placeholder="Numero de carnet">
+         </div>
+
+         <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Telefono</div>
+            </div>
+            <input type="text" class="form-control" name="telefono" placeholder="Telefono / Celular">
+         </div>
+        
+         <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Nivel</div>
+            </div>
+            <select class="form-control" name="nivel" type="text" placeholder="Nivel de usuario">
+                <option value="3">Administrador</option>
+                <option value="2">Gerencia</option>
+                <option value="1">usuario</option>
+              </select>
+         </div>
+        
+         <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Username</div>
+            </div>
+            <input type="text" class="form-control" name="usuario" placeholder="Username">
+         </div>
+          
+         <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Contraseña</div>
+            </div>
+            <input type="password" id="password" class="form-control" name="password" placeholder="Contraseña">
+         </div>
+
+         <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Confirme contraseña</div>
+            </div>
+            <input type="password" id="confirm-password" class="form-control" name="password2" placeholder="Confirme contraseña">
+         </div>
+        <div class="aviso" id="divchearsisoniguales"></div>
+
+        <div class="card-body d-flex justify-content-between align-items-center">
+						<a href="index.html" class="btn btn-secondary">Login</a>
+						<button class="btn btn-success ml-auto" id="thesubmitBoton" type="submit">Registrarme</button>
+        </div>
+          
+        
+    </form>
+   
+    
+    
+  </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS-->
+    <script src="js/jquery.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    
+    
+<script>
+          
+  $(document).ready(function () {
+  $("#confirm-password").keyup(checkPasswordMatch);
+   
+  });
+  
+  $(document).ready(function () {
+  $("#password").keyup(checkPasswordMatch2);
+   
+  });
+   
+
+  
+  function checkPasswordMatch2() {
+    var repeatPass= document.getElementById('confirm-password').value;
+    var repeatclave = repeatPass.length;  
+
+  
+   if (repeatclave>0)
+   {
+      var password = $("#password").val();
+      var confirmarPassword = $("#confirm-password").val();
+  
+      if (password != confirmarPassword){
+          $("#divchearsisoniguales").html("<div class='alert alert-danger'><i class='fa fa-close'></i>  Las contraseñas NO coinciden!<input value='error' type='hidden' name='passwordchecker'></div>");
+          document.getElementById("thesubmitBoton").disabled = true; 
+  } else{
+      
+          $("#divchearsisoniguales").html("<div class='alert alert-success'><i class='fa fa-check'></i> Las contraseñas coinciden.<input type='hidden'  value='1' name='passwordchecker'></div>");
+          document.getElementById("thesubmitBoton").disabled = false; 
+      }
+      }
+  }
+
+  </script>
+
+<script>
+  function checkPasswordMatch() {
+      var password = $("#password").val();
+      var confirmarPassword = $("#confirm-password").val();
+  
+      if (password != confirmarPassword){
+          var contador=0;
+          $("#divchearsisoniguales").html("<i class='fa fa-close'></i>  Las contraseñas NO coinciden!<input value='error' type='hidden' name='passwordchecker'>");
+          document.getElementById("thesubmitBoton").disabled = true; 
+  } else{
+      contador=1; 
+          $("#divchearsisoniguales").html("<i class='fa fa-check'></i> Las contraseñas coinciden.<input type='hidden'  value='1' name='passwordchecker'>");
+          document.getElementById("thesubmitBoton").disabled = false; 
+      }
+   
+  }
+  </script>
+
+</body>
+</html>
