@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/login.css">
+    
+    <!-- Bootstrap JS -->
+    
+  
+    <title>Mis Relevamientos</title>
+  </head>
+  <body>
+
+
+  <div class="container">
+    <div class="row ">
+
+       <!-- Form-de-Login -->
+       <div class="col-lg-4 col-md-3"></div>
+       <div id="login" class="col-lg-4 col-md-6">
+
+           <h5 align="center">Bienvenido al sistema de relevamientos<br></h5>
+           <small>Usted como personal tecnico podra registrar el relevamiento de un proyecto o servicio</small>
+            <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+            <img id="profile-img" class="profile-img-card" src="images/user.png" />
+
+
+            <form class="form-signin" action="php/login.php" method="POST">
+                <span id="reauth-email" class="reauth-email"></span>
+
+
+                <input type="text" name="usu" id="usu" class="form-control" placeholder="Usuario" required autofocus>
+                <input type="password" name="pass" id="pass" class="form-control" placeholder="Contraseña" required>
+
+                <!--<input type="checkbox" value="red">-->
+
+                <button class="btn btn-lg btn-success btn-signin" type="submit">Ingresar</button>
+            </form><!-- /form -->
+
+
+
+            <a href="regUsuario.html" class="forgot-password">
+               <span id="reauth-email" class="reauth-email"></span>
+                Registrarse
+            </a>
+        </div>
+        <!-- FIN-Form-de-Login -->
+        <div class="col-lg-4 col-md-3"></div>
+
+
+    </div>
+    </div>
+    
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS-->
+    <script src="js/jquery.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script id="__bs_script__">//<![CDATA[
+      document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.js?v=2.24.5'><\/script>".replace("HOST", location.hostname));
+  //]]></script>
+  </body>
+</html>
