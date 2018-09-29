@@ -1,50 +1,35 @@
-// var img = $('<img>');
-
-// // create a canvas to receive the image URL
-// var canvas = $('<canvas>');
-// var ctx = canvas[0].getContext("2d");
-
-// $("#camera").on("change", function () {
-//   var capturedImage = URL.createObjectURL(this.files[0]);
-
-//   img.attr('src', capturedImage);
-//   ctx.drawImage(img,0,0);
-
-//   var imageData = canvas[0].toDataURL("image/png");
-
-//   // do something with the image data    
-// });
+navigator.mediaDevices.enumerateDevices()
+        .then(devices => {
+          var videoDevices = [0,0];
+          var videoDeviceIndex = 0;
+          devices.forEach(function(device) {
+            console.log(device.kind + ": " + device.label +
+              " id = " + device.deviceId);
+            if (device.kind == "videoinput") {  
+              videoDevices[videoDeviceIndex++] =  device.deviceId;    
+            }
+          });
 
 
-// var camera = document.getElementById('camera');
-//  var $estado = document.getElementById("estado");
-//  var $canvas = document.getElementById("canvas");
+          var constraints =  {width: { min: 1024, ideal: 1280, max: 1920 },
+          height: { min: 776, ideal: 720, max: 1080 },
+          deviceId: { exact: videoDevices[1]  } 
+        };
+        return navigator.mediaDevices.getUserMedia({ video: constraints });
 
-//   camera.addEventListener('change', function(e) {
-//     var file = e.target.files[0]; 
-// 	// Do something with the image file.
-// 	//Haz algo con el archivo de imagen
-// 	//frame.src = URL.createObjectURL(file);
-
-// 				var contexto = $canvas.getContext("2d");
-// 				contexto.drawImage(camera, 0, 0);
-	
-// 				var foto = $canvas.toDataURL(); //Esta es la foto, en base 64
-// 				console.log('foto',foto);
-// 				$estado.innerHTML = "Enviando foto. Por favor, espera...";
-// 				var xhr = new XMLHttpRequest();
-// 				xhr.open("POST", "php/guardar_foto.php", true);
-// 				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-// 				xhr.send(encodeURIComponent(foto)); //Codificar y enviar
-
-// 				xhr.onreadystatechange = function() {
-// 				    if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-// 				        console.log("La foto fue enviada correctamente");
-// 				        console.log(xhr);
-// 				        $estado.innerHTML = "Foto guardada con éxito. Puedes verla <a target='_blank' href='php/" + xhr.responseText + "'> aquí</a>";
-// 				    }
-// 				}
-//   });
+      })
+        .then(stream => {
+          if (window.webkitURL) {
+            video.src = window.webkitURL.createObjectURL(stream);
+            localMediaStream = stream;
+          } else if (video.mozSrcObject !== undefined) {
+            video.mozSrcObject = stream;
+          } else if (video.srcObject !== undefined) {
+            video.srcObject = stream;
+          } else {
+            video.src = stream;
+          }})
+        .catch(e => console.error(e));
 
  
 
@@ -56,6 +41,7 @@ function _getUserMedia() {
     return (navigator.getUserMedia || (navigator.mozGetUserMedia || navigator.mediaDevices.getUserMedia) || navigator.webkitGetUserMedia || navigator.msGetUserMedia).apply(navigator, arguments);
 }
 
+
 // Declaramos elementos del DOM
 var $video = document.getElementById("video"),
 	$canvas = document.getElementById("canvas"),
@@ -63,7 +49,7 @@ var $video = document.getElementById("video"),
 	$estado = document.getElementById("estado");
 if (tieneSoporteUserMedia()) {
     _getUserMedia(
-		{video: { width: 1280, height: 720 }},
+		{video: {facingMode: { exact: "environment" }, width: 1280, height: 720 }},
         function (stream) {
             console.log("Permiso concedido");
 			$video.srcObject = stream;
