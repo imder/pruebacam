@@ -13,7 +13,7 @@ var $video = document.getElementById("video"),
 	$estado = document.getElementById("estado");
 if (tieneSoporteUserMedia()) {
     _getUserMedia(
-		{video: { width: 1280, height: 720 },
+		{video: { width: 1280, height: 720 }},
         function (stream) {
             console.log("Permiso concedido");
 			$video.srcObject = stream;
